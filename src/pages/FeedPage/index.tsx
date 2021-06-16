@@ -1,15 +1,20 @@
 import Header from '../../components/Header';
+// import Feed from '../../components/Feed';
+import BottomMenu from '../../components/BottomMenu';
 
-import { Container } from './styles';
+import { Container, Wrapper } from './styles';
 
 
 const FeedPage: React.FC = () => {
   return (
     <Container>
-      <Header />
-      {/* <Feed /> */}
+      <Wrapper>
+        <Header />
+        {/* <Feed /> */}
 
-      {/* <Sidebar /> */}
+        {/* <Sidebar /> */}
+        <BottomMenu />
+      </Wrapper>
     </Container>
   );
 }
