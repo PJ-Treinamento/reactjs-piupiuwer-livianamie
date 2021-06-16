@@ -4,6 +4,7 @@ export {
   House,
   Gear,
   Envelope,
+  List,
   ChatSquareText,
   Heart,
   HeartFill,

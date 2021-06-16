@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Search, Earlybirds } from '../../styles/Icons';
+import { List, Search, Earlybirds } from '../../styles/Icons';
 
 export const Container = styled.div`
   z-index: 2;
@@ -16,8 +16,8 @@ export const Container = styled.div`
   background-color: white;
   border-bottom: 0.2rem solid var(--purple);
 
-  > #mobile-search {
-    @media (min-width:700px) {
+  > #more {
+    @media (min-width:500px) {
       display: none;
     }
   }
@@ -68,5 +68,12 @@ export const SearchFeature = styled.div`
 `;
 export const SearchIcon = styled(Search)`
   width: 1.6rem;
+
+  cursor: pointer;
+`;
+export const MoreIcon = styled(List)`
+  width: 1.6rem;
+
+  cursor: pointer;
 `;
 
