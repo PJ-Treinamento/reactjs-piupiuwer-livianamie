@@ -1,5 +1,5 @@
 import Header from '../../components/Header';
-// import Feed from '../../components/Feed';
+import Feed from '../../components/Feed';
 import BottomMenu from '../../components/BottomMenu';
 
 import { Container, Wrapper } from './styles';
@@ -10,7 +10,7 @@ const FeedPage: React.FC = () => {
     <Container>
       <Wrapper>
         <Header />
-        {/* <Feed /> */}
+        <Feed />
 
         {/* <Sidebar /> */}
         <BottomMenu />
