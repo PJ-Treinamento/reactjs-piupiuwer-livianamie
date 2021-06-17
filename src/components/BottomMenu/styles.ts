@@ -12,8 +12,7 @@ export const Menu = styled.div`
   justify-content: space-between;
 
   width: 100%;
-  
-  padding: 1.3rem;
+
   background-color: white;
   border-top: 0.2rem solid var(--purple);
 

@@ -1,8 +1,9 @@
 import Header from '../../components/Header';
 import Feed from '../../components/Feed';
 import BottomMenu from '../../components/BottomMenu';
+import SideMenu from '../../components/SideMenu';
 
-import { Container, Wrapper } from './styles';
+import { Container, Wrapper, MiddleWrapper } from './styles';
 
 
 const FeedPage: React.FC = () => {
@@ -10,9 +11,10 @@ const FeedPage: React.FC = () => {
     <Container>
       <Wrapper>
         <Header />
-        <Feed />
-
-        {/* <Sidebar /> */}
+        <MiddleWrapper>
+          <Feed />
+          <SideMenu />
+        </MiddleWrapper>
         <BottomMenu />
       </Wrapper>
     </Container>
