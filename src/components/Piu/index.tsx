@@ -26,7 +26,7 @@ const Piu: React.FC = () => {
           <DotsIcon />
         </TopContent>
 
-        <p>Hoje eu acordei feliz</p>
+        <p>Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz</p>
 
         <Interactions>
           <Status>

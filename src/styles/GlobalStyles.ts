@@ -24,9 +24,9 @@ export default createGlobalStyle`
     font-size: 10px;
   }
   :root {
-    --purple: #7C00F3;
+    --purple: #9E00FF;
     --lighter-purple: #EAC9FF;
-    --darker-purple: #9E00FF;
+    --darker-purple: #7C00F3;
     --yellow: #FFF500;
   }
 `;

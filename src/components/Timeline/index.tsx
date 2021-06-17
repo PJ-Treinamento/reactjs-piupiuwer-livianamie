@@ -18,6 +18,10 @@ const Timeline: React.FC = () => {
       <Piu />
       <Piu />
       <Piu />
+      <Piu />
+      <Piu />
+      <Piu />
+      <Piu />
     </TimelineWrapper>
   );
 }

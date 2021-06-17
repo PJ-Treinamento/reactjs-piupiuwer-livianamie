@@ -11,15 +11,34 @@ export const PiuWrapper = styled.div`
 
   width: 100%;
 
-  padding: 0.8rem;
+  padding: 1rem;
+
+  @media (min-width: 800px) {
+    padding: 1.2rem;
+  }
+  @media (min-width: 1200px) {
+    padding: 1.5rem;
+  }
 
   > img {
-    width: 2.4rem;
+    width: 3rem;
 
-    margin-right: 0.7rem;
+    margin-right: 1rem;
 
     border: 0.15rem solid #7C00F3;
     border-radius: 50%;
+
+    @media (min-width: 500px) {
+      width: 3.4rem;
+    }
+    @media (min-width: 800px) {
+      width: 3.8rem;
+    }
+    @media (min-width: 1200px) {
+      width: 4rem;
+
+      margin-right: 1.5rem;
+    }
   }
 `;
 export const PiuContent = styled.div`
@@ -34,6 +53,20 @@ export const PiuContent = styled.div`
   > p {
     font-size: 1rem;
     margin: 0.2rem 0;
+
+    @media (min-width: 500px) {
+      font-size: 1.1rem;
+
+      margin: 0.7rem 0;
+    }
+    @media (min-width: 800px) {
+      font-size: 1.2rem;
+
+      margin: 0.9rem 0;
+    }
+    @media (min-width: 1200px) {
+     font-size: 1.4rem;
+    }
   }
 `;
 export const TopContent = styled.div`
@@ -58,11 +91,33 @@ export const UserInfos = styled.div`
   > strong {
     font-size: 1rem;
     margin-right: 0.3rem;
+
+    @media (min-width: 500px) {
+      font-size: 1.1rem;
+    }
+    @media (min-width: 800px) {
+      font-size: 1.2rem;
+    }
+    @media (min-width: 1200px) {
+     font-size: 1.4rem;
+    }
   }
+
   > span {
     font-size: 0.8rem;
+
+    @media (min-width: 500px) {
+      font-size: 0.9rem;
+    }
+    @media (min-width: 800px) {
+      font-size: 1rem;
+    }
+    @media (min-width: 1200px) {
+      font-size: 1.1rem;
+    }
   }
 `;
+
 const iconCSS = css`
   width: 0.8rem;
 
@@ -72,6 +127,16 @@ const iconCSS = css`
 
   &:hover {
     fill: var(--darker-purple);
+  }
+
+  @media (min-width: 500px) {
+    width: 1.1rem;
+  }
+  @media (min-width: 800px) {
+    width: 1.2rem;
+  }
+  @media (min-width: 1200px) {
+    width: 1.3rem;
   }
 `;
 export const DotsIcon = styled(ThreeDots)`
@@ -85,15 +150,33 @@ export const Interactions = styled.div`
   width: 95%;
 
   padding: 0 0.5rem;
-  margin-top: 0.7rem;
+  margin-top: 0.8rem;
+
+  @media (min-width: 500px) {
+    margin-top: 0.9rem;
+  }
+  @media (min-width: 800px) {
+    margin-top: 1rem;
+  }
+  @media (min-width: 1200px) {
+    margin-top: 1.1rem;
+  }
 `;
 export const Status = styled.div`
   display: flex;
   align-content: center;
 
-  width: 100%;
-
   font-size: 0.8rem;
+
+  @media (min-width: 500px) {
+    font-size: 0.9rem;
+  }
+  @media (min-width: 800px) {
+    font-size: 1rem;
+  }
+  @media (min-width: 1200px) {
+    font-size: 1.1rem;
+  }
 `;
 export const CommentIcon = styled(Chat)`
   ${iconCSS}

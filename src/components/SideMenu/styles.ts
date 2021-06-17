@@ -115,7 +115,7 @@ export const SearchIcon = styled(Search)`
 `;
 export const ProfileInfos = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   
 
   > img {
@@ -127,19 +127,38 @@ export const ProfileInfos = styled.div`
     margin-right: 0.6rem;
 
     @media (min-width: 800px) {
-    width: 4rem;
-  }
+      width: 4rem;
+    }
+    @media (min-width: 1200px) {
+      width: 5rem;
+
+      margin-right: 1rem;
+    }
   }
 `;
 export const Names = styled.div`
   display: none;
 
   > strong {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     letter-spacing: 0.1rem;
+
+    @media (min-width: 800px) {
+      font-size: 1.2rem;
+    }
+    @media (min-width: 1200px) {
+      font-size: 1.4rem;
+    }
   }
   > span {
     font-size: 1rem;
+
+    @media (min-width: 800px) {
+      font-size: 1.1rem;
+    }
+    @media (min-width: 1200px) {
+      font-size: 1.2rem;
+    }
   }
 
   @media (min-width: 800px) {

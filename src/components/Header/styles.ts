@@ -87,8 +87,11 @@ export const SearchFeature = styled.div`
 
     font-size: 1rem;
 
+    @media (min-width: 800px) {
+      width: 11rem;
+    }
     @media (min-width:1200px) {
-      width: 15rem;
+      width: 14rem;
       height: 3rem;
 
       font-size: 1.2rem;

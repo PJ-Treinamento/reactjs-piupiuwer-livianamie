@@ -31,10 +31,24 @@ export const Tab = styled.div`
     font-size: 1rem;
     font-weight: bold;
 
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.2rem;
+
+    cursor: pointer;
 
     &:hover {
       background-color: var(--lighter-purple);
+    }
+
+    @media (min-width: 500px) {
+      font-size: 1.1rem;
+    }
+    @media (min-width: 800px) {
+      font-size: 1.2rem;
+    }
+    @media (min-width: 1200px) {
+     font-size: 1.4rem;
+
+     padding: 0.7rem 1.6rem;
     }
   }
 
