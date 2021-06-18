@@ -6,6 +6,7 @@ import {
   HomeIcon,
   SearchIcon,
   NotificationsIcon,
+  FavoritesIcon,
   DMIcon,
   ConfigurationsIcon,
   ProfileInfos,
@@ -27,6 +28,10 @@ const SideMenu: React.FC = () => {
         <Option>
           <DMIcon />
           <strong>Mensagens</strong>
+        </Option>
+        <Option>
+          <FavoritesIcon />
+          <strong>Favoritos (0)</strong>
         </Option>
         <Option>
           <ConfigurationsIcon />

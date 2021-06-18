@@ -17,6 +17,7 @@ export default createGlobalStyle`
     border: 0;
     background: none;
     font-family: 'Poppins', 'Helvetica', Arial, sans-serif;
+    outline: 0;
   }
   html {
     background: #EAC9FF;

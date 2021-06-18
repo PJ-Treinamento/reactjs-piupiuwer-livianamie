@@ -28,6 +28,8 @@ export const PiuWrapper = styled.div`
     border: 0.15rem solid #7C00F3;
     border-radius: 50%;
 
+    cursor: pointer;
+
     @media (min-width: 500px) {
       width: 3.4rem;
     }
@@ -105,6 +107,8 @@ export const UserInfos = styled.div`
 
   > span {
     font-size: 0.8rem;
+
+    cursor: pointer;
 
     @media (min-width: 500px) {
       font-size: 0.9rem;

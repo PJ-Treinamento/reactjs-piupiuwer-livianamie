@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { House, Search, Bell, Envelope, Gear } from '../../styles/Icons';
+import { House, Search, Bell, Star, Envelope, Gear } from '../../styles/Icons';
 
 export const SideMenuWrapper = styled.div`
   display: none;
@@ -103,6 +103,9 @@ export const NotificationsIcon = styled(Bell)`
 export const DMIcon = styled(Envelope)`
   ${iconCSS}
 `;
+export const FavoritesIcon = styled(Star)`
+  ${iconCSS}
+`;
 export const ConfigurationsIcon = styled(Gear)`
   ${iconCSS}
 `;
@@ -117,17 +120,16 @@ export const ProfileInfos = styled.div`
   display: flex;
   align-items: center;
   
-
   > img {
     width: 3rem;
 
     border: 0.15rem solid #7C00F3;
     border-radius: 50%;
 
-    margin-right: 0.6rem;
-
     @media (min-width: 800px) {
       width: 4rem;
+
+      margin-right: 0.6rem;
     }
     @media (min-width: 1200px) {
       width: 5rem;
