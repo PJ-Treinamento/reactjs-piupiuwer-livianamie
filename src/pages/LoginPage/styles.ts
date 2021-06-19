@@ -85,7 +85,7 @@ export const Logo = styled(Earlybirds)`
 `;
 export const Inputs = styled.div`
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: center;
 
   > input {

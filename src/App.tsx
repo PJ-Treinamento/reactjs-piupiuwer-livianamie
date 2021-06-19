@@ -1,11 +1,17 @@
-import Routes from './routes';
+
+import Routes from './routes/routes';
+
+import { AuthProvider } from './hooks/useAuth';
+
 import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
   return (
     <>
-      <GlobalStyles />
-      <Routes />
+      <AuthProvider>
+          <GlobalStyles />
+          <Routes />
+      </AuthProvider>
     </>
   );
 }
