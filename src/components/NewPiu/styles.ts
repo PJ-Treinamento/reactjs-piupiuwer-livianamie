@@ -89,29 +89,28 @@ export const Text = styled.div`
   height: 100%;
 
   margin: 0 1.5rem;
+`;
+export const Textarea = styled.textarea`
+  width: 100%;
+  height: 100%;
 
-  > textarea {
-    width: 100%;
-    height: 100%;
+  resize: none;
 
-    resize: none;
+  padding: 1rem;
 
-    padding: 1rem;
+  font-size: 1rem;
 
-    font-size: 1rem;
+  outline: auto;
+  overflow-y: auto;
 
-    outline: none;
-    overflow-y: auto;
-
-    @media (min-width: 500px) {
-      font-size: 1.1rem;
-    }
-    @media (min-width: 800px) {
-      font-size: 1.2rem;
-    }
-    @media (min-width: 1200px) {
-     font-size: 1.4rem;
-    }
+  @media (min-width: 500px) {
+    font-size: 1.1rem;
+  }
+  @media (min-width: 800px) {
+    font-size: 1.2rem;
+  }
+  @media (min-width: 1200px) {
+    font-size: 1.4rem;
   }
 `;
 export const Counter = styled.div`
@@ -123,7 +122,6 @@ export const Counter = styled.div`
 
   > span {
     font-size: 0.9rem;
-    color: red;
 
     @media (min-width: 500px) {
       font-size: 1rem;
@@ -135,18 +133,19 @@ export const Counter = styled.div`
      font-size: 1.2rem;
     }
   }
+`;
 
-  > p {
-    font-size: 1rem;
+export const CounterValue = styled.p`
+  font-size: 1rem;
+  color: red;
 
-    @media (min-width: 500px) {
-      font-size: 1.1rem;
-    }
-    @media (min-width: 800px) {
-      font-size: 1.2rem;
-    }
-    @media (min-width: 1200px) {
-     font-size: 1.4rem;
-    }
+  @media (min-width: 500px) {
+    font-size: 1.1rem;
+  }
+  @media (min-width: 800px) {
+    font-size: 1.2rem;
+  }
+  @media (min-width: 1200px) {
+  font-size: 1.4rem;
   }
 `;
