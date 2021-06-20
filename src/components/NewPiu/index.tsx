@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import api from '../../services/api';
 import { NewPiuWrapper, Text, Counter } from './styles';
 
 const NewPiu: React.FC = () => {

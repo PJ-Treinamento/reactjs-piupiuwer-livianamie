@@ -15,10 +15,10 @@ export const Main = styled.div`
   }
   @media (min-width: 800px) {
     margin: 3rem;
-    margin-right: 19rem;
+    margin-right: 24rem;
   }
   @media (min-width: 1200px) {
     margin: 4rem;
-    margin-right: 24rem;
+    margin-right: 28rem;
   }
 `;

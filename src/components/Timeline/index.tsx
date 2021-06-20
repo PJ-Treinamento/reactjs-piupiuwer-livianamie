@@ -11,20 +11,22 @@ const Timeline: React.FC = () => {
 
   useEffect(() => {
     const loadPius = async () => {
-      const response = await api.get('/pius');
+      const response = await api.get('/pius').then()
+      console.log(response.data)
       setPius(response.data);
     }
     loadPius()
   }, []);
+
   return (
     <TimelineWrapper>
       <Tab>
         <p id="pius-section">Pius</p>
         <p>Pius e repostas</p>
       </Tab>
-      {/* {pius.map((piu: IPiu) => {
-          return <Piu key={piu.id} />
-      })} */}
+      {pius.map((piu: IPiu) => {
+          return <Piu key={piu.id} piu = {piu}/>
+      })}
     </TimelineWrapper>
   );
 }

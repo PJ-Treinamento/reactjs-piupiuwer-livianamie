@@ -1,3 +1,7 @@
+import { useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { IPiu } from '../../models';
+import api from '../../services/api';
 import { 
   PiuWrapper,
   PiuContent,
@@ -13,33 +17,56 @@ import {
   ShareIcon
  } from './styles';
 
-const Piu: React.FC = () => {
+
+ interface PiuProps {
+  piu: IPiu,
+}
+ 
+
+const Piu: React.FC<PiuProps> = ({ piu }) => {
+  const [likeCount, setLikeCount] = useState(piu.likes.length);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isFirstRender, setisFirstRender] = useState(true);
+  
+  
+  useEffect(()=> {
+    if (!isFirstRender) {
+      const handleLike = () => {
+      isLiked
+      ? setLikeCount(likeCount + 1) 
+      : setLikeCount(likeCount - 1)
+    }
+  handleLike();
+  }
+  setisFirstRender(false)
+}, [isLiked])
+
   return (
     <PiuWrapper>
-      <img src="https://pbs.twimg.com/profile_images/1348333892105809923/elSUO1Wu_400x400.jpg" alt="Foto de perfil" />
+      <img src={ piu.user.photo } alt="Foto de perfil" />
       <PiuContent>
         <TopContent>
           <UserInfos>
-            <strong>Fulano</strong>
-            <span>@fulaninho</span>
+            <strong>{ piu.user.first_name }</strong>
+            <span>@{ piu.user.username }</span>
           </UserInfos>
           <DotsIcon />
         </TopContent>
 
-        <p>Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz Hoje eu acordei feliz</p>
+        <p>{ piu.text }</p>
 
         <Interactions>
           <Status>
             <CommentIcon />
-            3
+            0
           </Status>
           <Status>
             <RepiuIcon />
-            2
+            12
           </Status>
           <Status>
-            <LikeIcon />
-            5
+            <LikeIcon onClick={() => {setIsLiked(!isLiked)}}/>
+            { likeCount }
           </Status>
           <FavoriteIcon />
           <ShareIcon />
