@@ -49,19 +49,15 @@ export const AuthProvider: React.FC = ({ children }) => {
       const response = await api.post('/sessions/login', data)
        
       const token = response.data.token;
-      const username = response.data.user.username;
+      const user = response.data.user;
       
       if (token) {
         api.defaults.headers.Authorization = `Bearer ${token}`;
-
-        const userApiResponse = await api.get(`/users?username=${username}`);
-        const user = userApiResponse.data;
 
         localStorage.setItem('@Piupiuwer:token', token);
         localStorage.setItem('@Piupiuwer:user', JSON.stringify(user));
 
         setUserData({ token: token, user: user });
-        // history.push('/Feed');
       }
       setLoading(false);
     }

@@ -119,19 +119,20 @@ export const Counter = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  width: 95%;
+  width: 100%;
 
   > span {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    color: red;
 
     @media (min-width: 500px) {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     @media (min-width: 800px) {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
     @media (min-width: 1200px) {
-     font-size: 1.4rem;
+     font-size: 1.2rem;
     }
   }
 

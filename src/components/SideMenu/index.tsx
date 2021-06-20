@@ -1,4 +1,5 @@
 
+import { useAuth } from '../../hooks/useAuth';
 import { 
   SideMenuWrapper,
   Menu,
@@ -14,6 +15,8 @@ import {
 } from './styles';
 
 const SideMenu: React.FC = () => {
+  const { user } = useAuth();
+
   return (
     <SideMenuWrapper>
       <Menu>
@@ -44,10 +47,10 @@ const SideMenu: React.FC = () => {
       </Menu>
 
       <ProfileInfos>
-        <img src="https://pbs.twimg.com/profile_images/1245853589320368133/cRyUvTc5_400x400.jpg" alt="Foto de perfil" />
+        <img src={user.photo} alt="Foto de perfil" />
         <Names>
-          <strong>Lívia</strong>
-          <span>@livianamie_</span>
+          <strong>{user.first_name}</strong>
+          <span>@{user.username}</span>
         </Names>
       </ProfileInfos>
     </SideMenuWrapper>

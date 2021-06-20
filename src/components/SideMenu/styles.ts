@@ -24,14 +24,18 @@ export const SideMenuWrapper = styled.div`
   @media (min-width: 800px) {
     align-items: flex-start;
 
-    width: 16rem;
+    width: 20rem;
 
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
     padding-bottom: 7rem;
   }
   @media (min-width: 1200px) {
     top: 6rem;
-    width: 20rem;
+
+    width: 24rem;
+    
+    padding: 4rem 2rem;
+    padding-bottom: 7rem;
   }
 `;
 
@@ -153,13 +157,13 @@ export const Names = styled.div`
     }
   }
   > span {
-    font-size: 1rem;
+    font-size: 0.8rem;
 
     @media (min-width: 800px) {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     @media (min-width: 1200px) {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
   }
 
