@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { ThreeDots, Chat, ArrowRepeat, Heart, Star, Share } from '../../styles/Icons';
+import { ThreeDots, Chat, ArrowRepeat, Heart, Star, Share, Trash } from '../../styles/Icons';
 
 export const PiuWrapper = styled.div`
   display: flex;
@@ -196,4 +196,8 @@ export const FavoriteIcon = styled(Star)`
 `;
 export const ShareIcon = styled(Share)`
   ${iconCSS}
+`;
+export const TrashIcon = styled(Trash)`
+  ${iconCSS}
+  display: none;
 `;

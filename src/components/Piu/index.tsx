@@ -1,7 +1,12 @@
-import { useRef } from 'react';
+
+import { useCallback, useRef } from 'react';
 import { useEffect, useState } from 'react';
-import { IPiu } from '../../models';
+import { useAuth } from '../../hooks/useAuth';
+
+import { IPiu, IPiuLike } from '../../models';
+
 import api from '../../services/api';
+
 import { 
   PiuWrapper,
   PiuContent,
@@ -14,36 +19,150 @@ import {
   RepiuIcon,
   LikeIcon,
   FavoriteIcon,
-  ShareIcon
+  ShareIcon,
+  TrashIcon
  } from './styles';
 
 
  interface PiuProps {
   piu: IPiu,
+  pius: IPiu[],
+  isFromUser: boolean
 }
  
 
-const Piu: React.FC<PiuProps> = ({ piu }) => {
+const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
   const [likeCount, setLikeCount] = useState(piu.likes.length);
-  const [isLiked, setIsLiked] = useState(false);
+  const [favoriteCount, setFavoriteCount] = useState(0);
+  // const [piuLikeData, setpiuLikeData] = useState<IPiuLike>({} as IPiuLike);
+  
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const [likeColor, setLikeColor] = useState('black');
+  const [favoriteColor, setFavoriteColor] = useState('black');
+  const [deleteDisplay, setDeleteDisplay] = useState('none');
+  
+  const { user } = useAuth();
+
+  const likeCountRef = useRef(likeCount);
+
+  const id = piu.id
+  
   const [isFirstRender, setisFirstRender] = useState(true);
+
   
-  
-  useEffect(()=> {
-    if (!isFirstRender) {
-      const handleLike = () => {
-      isLiked
-      ? setLikeCount(likeCount + 1) 
-      : setLikeCount(likeCount - 1)
+  useEffect(() => {
+    likeCountRef.current = likeCount 
+  }, [likeCount])
+
+  useEffect(() => {
+    if (isFromUser) {
+      setDeleteDisplay('initial')
     }
-  handleLike();
+    else {
+      setDeleteDisplay('none')
+    }
+  }, [])
+
+  useEffect(() => {
+    pius.map((piuApi: IPiu) => {
+      if (id === piuApi.id) {
+        piuApi.likes.map((like: IPiuLike) => {
+          if (like.user.username === user.username) {
+            return setLikeColor('red');
+          }
+          else {
+            return setLikeColor('black');
+          }
+        })
+      }
+    })
+  }, [])
+
+
+  const handleLike = useCallback(() => {    
+    pius.map((piuApi: IPiu) => {
+      if (id === piuApi.id) {
+        const addLikeToApi = async () => {
+          const response = await api.post('/pius/like', { piu_id: piuApi.id })
+          const operation: string = response.data.operation
+
+          if (operation === 'like') {
+            setLikeCount(likeCount + 1);
+            setLikeColor('red');
+            console.log('oi')
+          }
+          else {
+            setLikeCount(likeCount - 1);
+            setLikeColor('black');
+          }
+        }
+        addLikeToApi()
+      }
+    })
+  }, [likeCount])
+
+
+  useEffect(() => {
+    if (!isFirstRender) {
+      const handleFavorites = () => {
+        if (isFavorited) {
+          pius.map((piuApi: IPiu) => {
+            if (id === piuApi.id) {
+              console.log(piuApi)
+              console.log(piuApi.id)
+                            
+              const addFavoriteToApi = async () => {
+                await api.post('/pius/favorite', { piu_id: piuApi.id })
+                console.log(user.favorites.length )
+              }
+              addFavoriteToApi()
+            }
+            return favoriteCount;
+          })
+          setFavoriteCount(likeCount + 1);
+          setFavoriteColor('#FFB500');
+        }
+        else {
+          pius.map((piuApi: IPiu) => {
+            if (id === piuApi.id) {
+              console.log(piuApi)
+              console.log(piuApi.id)
+                            
+              const addFavoriteToApi = async () => {
+                await api.post('/pius/unfavorite', { piu_id: piuApi.id })
+                console.log(user.favorites.length)
+              }
+              addFavoriteToApi()
+            }
+            return favoriteCount;
+          })
+          setFavoriteCount(favoriteCount - 1);
+          setFavoriteColor('black');
+        }
+      }
+      handleFavorites();
   }
-  setisFirstRender(false)
-}, [isLiked])
+  setisFirstRender(false);
+  }, [isFavorited])
+
+
+  const handleDelete = useCallback( () => {    
+    pius.map((piuApi: IPiu) => {
+      if (id === piuApi.id) {
+        const deletePiu = async () => {
+          await api.delete('/pius', { data: {piu_id: piuApi.id} })
+          window.location.reload();
+        }
+        deletePiu()
+      }
+    })
+  }, [])
+
 
   return (
     <PiuWrapper>
-      <img src={ piu.user.photo } alt="Foto de perfil" />
+      <img src={ piu.user.photo } alt="Foto" />
       <PiuContent>
         <TopContent>
           <UserInfos>
@@ -65,11 +184,12 @@ const Piu: React.FC<PiuProps> = ({ piu }) => {
             12
           </Status>
           <Status>
-            <LikeIcon onClick={() => {setIsLiked(!isLiked)}}/>
-            { likeCount }
+            <LikeIcon style={{fill: `${likeColor}`}} onClick={handleLike} />
+            { likeCountRef.current }
           </Status>
-          <FavoriteIcon />
+          <FavoriteIcon style={{fill: `${favoriteColor}`}} onClick={() => {setIsFavorited(!isFavorited)}} />
           <ShareIcon />
+          <TrashIcon style={{display: `${deleteDisplay}`}} onClick={handleDelete} />
         </Interactions>
       </PiuContent>
     </PiuWrapper>

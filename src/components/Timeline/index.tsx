@@ -1,22 +1,13 @@
 
 import { TimelineWrapper, Tab } from './styles';
 import Piu from '../Piu';
-import { IPiu } from '../../models';
-import { useEffect, useState } from 'react';
-import api from '../../services/api';
 
-const Timeline: React.FC = () => {
-  const [pius, setPius] = useState([]);
-  
+import { IPiu, IPius } from '../../models';
 
-  useEffect(() => {
-    const loadPius = async () => {
-      const response = await api.get('/pius').then()
-      console.log(response.data)
-      setPius(response.data);
-    }
-    loadPius()
-  }, []);
+import { useAuth } from '../../hooks/useAuth';
+
+const Timeline: React.FC<IPius> = ({ pius }) => {
+  const { user } = useAuth();
 
   return (
     <TimelineWrapper>
@@ -25,7 +16,15 @@ const Timeline: React.FC = () => {
         <p>Pius e repostas</p>
       </Tab>
       {pius.map((piu: IPiu) => {
-          return <Piu key={piu.id} piu = {piu}/>
+        const apiPiuUser = piu.user.username
+        let isFromUser: boolean = false;
+        if (apiPiuUser === user.username) {
+          isFromUser = true
+        }
+        else {
+          isFromUser = false
+        }
+        return <Piu key={piu.id} piu={piu} pius={pius} isFromUser={isFromUser}/>
       })}
     </TimelineWrapper>
   );

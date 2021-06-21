@@ -1,6 +1,11 @@
 
+
 import { useEffect, useState } from 'react';
+
 import { useAuth } from '../../hooks/useAuth';
+
+import api from '../../services/api';
+
 import { NewPiuWrapper, Text, Textarea, Counter, CounterValue } from './styles';
 
 const NewPiu: React.FC = () => {
@@ -11,8 +16,8 @@ const NewPiu: React.FC = () => {
   const [outlineColor, setOutlineColor] = useState('#BABABA');
   
   const [charErrorMessage, setCharErrorMessage] = useState('');
-  const { user } = useAuth();
 
+  const { user } = useAuth();
 
   useEffect(() => {
     setCounter(text.length);
@@ -32,6 +37,10 @@ const NewPiu: React.FC = () => {
     counterCheck();
   }, [text.length])
 
+  const handleNewPiu = async () => {
+    await api.post('/pius', { text: text })
+    window.location.reload();
+  }
 
   return (
     <NewPiuWrapper>
@@ -43,7 +52,7 @@ const NewPiu: React.FC = () => {
           <CounterValue style={{color: `${counterColor}`}}>{ counter }</CounterValue>
         </Counter>
       </Text>
-      <button type="submit">Piu</button>
+      <button onClick={handleNewPiu}>Piu</button>
     </NewPiuWrapper>
   );
 }

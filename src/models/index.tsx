@@ -1,4 +1,6 @@
-
+export interface IPius {
+	pius: IPiu[];
+}
 export interface IPiu {
   id: string;
 	user: IUser;
