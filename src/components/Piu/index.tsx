@@ -188,8 +188,8 @@ const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
             { likeCountRef.current }
           </Status>
           <FavoriteIcon style={{fill: `${favoriteColor}`}} onClick={() => {setIsFavorited(!isFavorited)}} />
-          <ShareIcon />
           <TrashIcon style={{display: `${deleteDisplay}`}} onClick={handleDelete} />
+          <ShareIcon />
         </Interactions>
       </PiuContent>
     </PiuWrapper>

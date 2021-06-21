@@ -7,11 +7,15 @@ export const PiuWrapper = styled.div`
   justify-content: space-between;
 
   background-color: white;
-  border-bottom: 0.05rem solid var(--purple);
+  border-top: 0.05rem solid var(--purple);
 
   width: 100%;
 
   padding: 1rem;
+
+  :first-child {
+    border-top: none;
+  }
 
   @media (min-width: 800px) {
     padding: 1.2rem;
@@ -22,8 +26,11 @@ export const PiuWrapper = styled.div`
 
   > img {
     width: 3rem;
+    height: 3rem;
 
     margin-right: 1rem;
+
+    object-fit: cover;
 
     border: 0.15rem solid #7C00F3;
     border-radius: 50%;
@@ -32,12 +39,15 @@ export const PiuWrapper = styled.div`
 
     @media (min-width: 500px) {
       width: 3.4rem;
+      height: 3.4rem;
     }
     @media (min-width: 800px) {
       width: 3.8rem;
+      height: 3.8rem;
     }
     @media (min-width: 1200px) {
       width: 4rem;
+      height: 4rem;
 
       margin-right: 1.5rem;
     }
