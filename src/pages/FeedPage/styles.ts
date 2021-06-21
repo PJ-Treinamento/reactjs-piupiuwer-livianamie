@@ -12,6 +12,9 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
+  background: url(/background.svg) no-repeat center center fixed;
+  background-size: cover;
 `;
 export const MiddleWrapper = styled.div`
   width: 100%;

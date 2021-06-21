@@ -24,6 +24,10 @@ export default createGlobalStyle`
 
     font-size: 10px;
   }
+  body {
+    background: url(/background.svg) no-repeat center center fixed;
+    background-size: cover;
+  }
   :root {
     --purple: #9E00FF;
     --lighter-purple: #EAC9FF;

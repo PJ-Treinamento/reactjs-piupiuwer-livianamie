@@ -67,20 +67,21 @@ export const LoginPageWrapper = styled.div`
   }
 `;
 export const Logo = styled(Earlybirds)`
-  width: 7rem;
+  width: 70px;
+  flex-shrink: 0;
 
   color: var(--purple);
 
   margin-bottom: 3rem;
 
   @media (min-width: 500px) {
-    width: 8rem;
+    width: 80px;
   }
   @media (min-width: 800px) {
-    width: 9rem;
+    width: 90px;
   }
   @media (min-width: 1200px) {
-    width: 11rem;
+    width: 110px;
   }
 `;
 export const Inputs = styled.div`
