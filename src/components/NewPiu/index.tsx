@@ -52,7 +52,7 @@ const NewPiu: React.FC = () => {
           <CounterValue style={{color: `${counterColor}`}}>{ counter }</CounterValue>
         </Counter>
       </Text>
-      <button onClick={handleNewPiu}>Piu</button>
+      <button disabled={text === ' ' || text.length < 1 || text.length > 140} onClick={handleNewPiu}>Piu</button>
     </NewPiuWrapper>
   );
 }

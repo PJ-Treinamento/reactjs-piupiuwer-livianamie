@@ -7,6 +7,8 @@ import { Container, PageInfo, Logo, SearchFeature, MoreIcon, PopUpWrapper, PopUp
 const Header: React.FC = () => {
   const [popUpDisplay, setPopUpDisplay] = useState('none');
   const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState('');
+  
   
 
   useEffect(() => {
@@ -27,7 +29,6 @@ const Header: React.FC = () => {
     setPopUpDisplay('none')
   }, [])
 
-
   return (
     <Container>
       <PageInfo>
@@ -43,12 +44,26 @@ const Header: React.FC = () => {
 
       <PopUpWrapper style={{display: `${popUpDisplay}`}}>
         <PopUp >
-          <input type="text" placeholder='Buscar' />
+          <input type="text" onChange={(e) => {setSearch(e.target.value)}} value={search} placeholder='Buscar' />
         
           <UsersList>
             {users.map((user: IUser) => {
+              if (search === '') { 
+                return (
+                  <User key={user.id}>
+                    <img src={user.photo} alt="" />
+                    <Names>
+                      <strong>{user.first_name} {user.last_name}</strong>
+                      <span>@{user.username}</span>
+                    </Names>
+                  </User>
+                )
+              }
+             if(user.username.toLowerCase().includes(search.toLowerCase()) 
+             || user.first_name.toLowerCase().includes(search.toLowerCase())
+             || user.last_name.toLowerCase().includes(search.toLowerCase())) {
               return (
-                <User>
+                <User key={user.id}>
                   <img src={user.photo} alt="" />
                   <Names>
                     <strong>{user.first_name} {user.last_name}</strong>
@@ -56,6 +71,7 @@ const Header: React.FC = () => {
                   </Names>
                 </User>
               )
+             }
             })}
           </UsersList>
 

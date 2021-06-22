@@ -14,6 +14,7 @@ export {
   StarFill,
   Share,
   Trash,
-  ThreeDots
+  ThreeDots,
+  XCircle
 } from '@styled-icons/bootstrap';
 export { Earlybirds } from '@styled-icons/fa-brands';
