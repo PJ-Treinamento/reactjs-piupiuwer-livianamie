@@ -1,5 +1,5 @@
 
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -33,27 +33,17 @@ import {
 
 const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
   const [likeCount, setLikeCount] = useState(piu.likes.length);
-  const [favoriteCount, setFavoriteCount] = useState(0);
-  // const [piuLikeData, setpiuLikeData] = useState<IPiuLike>({} as IPiuLike);
   
   const [isFavorited, setIsFavorited] = useState(false);
 
   const [likeColor, setLikeColor] = useState('black');
   const [favoriteColor, setFavoriteColor] = useState('black');
   const [deleteDisplay, setDeleteDisplay] = useState('none');
-  
+
   const { user } = useAuth();
 
-  const likeCountRef = useRef(likeCount);
-
   const id = piu.id
-  
-  const [isFirstRender, setisFirstRender] = useState(true);
 
-  
-  useEffect(() => {
-    likeCountRef.current = likeCount 
-  }, [likeCount])
 
   useEffect(() => {
     if (isFromUser) {
@@ -65,10 +55,11 @@ const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
   }, [])
 
   useEffect(() => {
-    pius.map((piuApi: IPiu) => {
-      if (id === piuApi.id) {
-        piuApi.likes.map((like: IPiuLike) => {
-          if (like.user.username === user.username) {
+    pius.map((piu: IPiu) => {
+      const piuLikes: IPiuLike[] = piu.likes
+      if (id === piu.id) {
+        piuLikes.map((like: IPiuLike) => {
+          if (like.user.id === user.id) {
             return setLikeColor('red');
           }
           else {
@@ -79,20 +70,21 @@ const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
     })
   }, [])
 
-
   const handleLike = useCallback(() => {    
     pius.map((piuApi: IPiu) => {
       if (id === piuApi.id) {
         const addLikeToApi = async () => {
           const response = await api.post('/pius/like', { piu_id: piuApi.id })
           const operation: string = response.data.operation
+          console.log(operation)
 
           if (operation === 'like') {
+            console.log(piuApi.likes)
             setLikeCount(likeCount + 1);
             setLikeColor('red');
-            console.log('oi')
           }
           else {
+            console.log(piuApi.likes)
             setLikeCount(likeCount - 1);
             setLikeColor('black');
           }
@@ -103,47 +95,13 @@ const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
   }, [likeCount])
 
 
-  useEffect(() => {
-    if (!isFirstRender) {
-      const handleFavorites = () => {
-        if (isFavorited) {
-          pius.map((piuApi: IPiu) => {
-            if (id === piuApi.id) {
-              console.log(piuApi)
-              console.log(piuApi.id)
-                            
-              const addFavoriteToApi = async () => {
-                await api.post('/pius/favorite', { piu_id: piuApi.id })
-                console.log(user.favorites.length )
-              }
-              addFavoriteToApi()
-            }
-            return favoriteCount;
-          })
-          setFavoriteCount(likeCount + 1);
-          setFavoriteColor('#FFB500');
-        }
-        else {
-          pius.map((piuApi: IPiu) => {
-            if (id === piuApi.id) {
-              console.log(piuApi)
-              console.log(piuApi.id)
-                            
-              const addFavoriteToApi = async () => {
-                await api.post('/pius/unfavorite', { piu_id: piuApi.id })
-                console.log(user.favorites.length)
-              }
-              addFavoriteToApi()
-            }
-            return favoriteCount;
-          })
-          setFavoriteCount(favoriteCount - 1);
-          setFavoriteColor('black');
-        }
-      }
-      handleFavorites();
-  }
-  setisFirstRender(false);
+  useEffect (() => {
+    if (isFavorited) {
+      setFavoriteColor('#FFB500');
+    }
+    else {
+      setFavoriteColor('black');
+    }
   }, [isFavorited])
 
 
@@ -151,10 +109,10 @@ const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
     pius.map((piuApi: IPiu) => {
       if (id === piuApi.id) {
         const deletePiu = async () => {
-          await api.delete('/pius', { data: {piu_id: piuApi.id} })
+          await api.delete('/pius', { data: {piu_id: piuApi.id }})
           window.location.reload();
         }
-        deletePiu()
+        return deletePiu()
       }
     })
   }, [])
@@ -185,7 +143,7 @@ const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
           </Status>
           <Status>
             <LikeIcon style={{fill: `${likeColor}`}} onClick={handleLike} />
-            { likeCountRef.current }
+            { likeCount }
           </Status>
           <FavoriteIcon style={{fill: `${favoriteColor}`}} onClick={() => {setIsFavorited(!isFavorited)}} />
           <TrashIcon style={{display: `${deleteDisplay}`}} onClick={handleDelete} />

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { List, Search, Earlybirds, XCircle } from '../../styles/Icons';
+import { List, Earlybirds, XCircle } from '../../styles/Icons';
 
-export const Container = styled.div`
+export const Container = styled.header`
   z-index: 2;
   position: sticky;
   top: 0;
