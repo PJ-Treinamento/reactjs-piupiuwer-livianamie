@@ -50,17 +50,46 @@ export const NewPiuWrapper = styled.div`
     background: var(--purple);
 
     box-shadow: 0.1rem 0.1rem 0 0.1rem var(--yellow);
-    border-radius: 5px;
+    border-radius: 0.8rem;
 
     font-family: 'Poppins', 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
     font-size: 1rem;
     color: var(--yellow);
     text-shadow: 0.1rem 0.1rem 0 #000000;
 
     cursor: pointer;
 
+    overflow: hidden;
+    transition: .2s transform ease-in-out;
+    will-change: transform;
+    z-index: 0;
+    
+    &::after {
+      background-color: var(--yellow);
+      border-radius: 0.8rem;
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-100%, 0) rotate(0);
+      transition: .2s transform ease-out;
+      will-change: transform;
+      z-index: -1;
+    }
+    &:hover::after{
+      transform: translate(0, 0);
+    }
     &:hover {
-      background: var(--darker-purple);
+      transform: scale(1.05);
+      will-change: transform;
+
+      color: var(--darker-purple);
+      box-shadow: 0.2rem 0.2rem 0 0 var(--purple);
+      text-shadow: 0 0 0;
     }
 
     @media (min-width: 500px) {
@@ -102,6 +131,7 @@ export const Textarea = styled.textarea`
 
   outline: auto;
   overflow-y: auto;
+  background-color: var(--lighter-purple);
 
   @media (min-width: 500px) {
     font-size: 1.1rem;

@@ -27,7 +27,7 @@ export const SideMenuWrapper = styled.div`
     width: 20rem;
 
     padding: 4rem 1.5rem;
-    padding-bottom: 7rem;
+    padding-bottom: 7.5rem;
   }
   @media (min-width: 1200px) {
     top: 6rem;
@@ -35,10 +35,9 @@ export const SideMenuWrapper = styled.div`
     width: 24rem;
     
     padding: 4rem 2rem;
-    padding-bottom: 7rem;
+    padding-bottom: 7.5rem;
   }
 `;
-
 export const Menu = styled.div`
   display: flex;
   flex-direction: column;
@@ -90,36 +89,6 @@ export const Option = styled.div`
     }
   }
 `;
-
-const iconCSS = css`
-  width: 1.5rem;
-
-  @media (min-width: 1200px) {
-    width: 2rem;
-  }
-`;
-export const HomeIcon = styled(House)`
-  ${iconCSS}
-`;
-export const NotificationsIcon = styled(Bell)`
-  ${iconCSS}
-`;
-export const DMIcon = styled(Envelope)`
-  ${iconCSS}
-`;
-export const FavoritesIcon = styled(Star)`
-  ${iconCSS}
-`;
-export const ConfigurationsIcon = styled(Gear)`
-  ${iconCSS}
-`;
-export const SearchIcon = styled(Search)`
-  ${iconCSS}
-
-  @media (min-width: 800px) {
-    display: none;
-  }
-`;
 export const ProfileInfos = styled.div`
   display: flex;
   align-items: center;
@@ -148,6 +117,16 @@ export const Names = styled.div`
   > strong {
     font-size: 1.1rem;
     letter-spacing: 0.1rem;
+    
+    padding: 0.2rem;
+
+    cursor: pointer;
+
+    &:hover {
+    color: var(--darker-purple);
+    background: var(--lighter-purple);
+    border-radius: 0.8rem;
+  }
 
     @media (min-width: 800px) {
       font-size: 1.2rem;
@@ -158,6 +137,14 @@ export const Names = styled.div`
   }
   > span {
     font-size: 0.8rem;
+
+    padding: 0.2rem;
+
+    &:hover {
+    color: var(--darker-purple);
+    background: var(--lighter-purple);
+    border-radius: 0.8rem;
+    }
 
     @media (min-width: 800px) {
       font-size: 1rem;
@@ -173,4 +160,53 @@ export const Names = styled.div`
     align-items: flex-start;
   }
   
+`;
+
+const iconCSS = css`
+  width: 1.5rem;
+
+  @media (min-width: 1200px) {
+    width: 2rem;
+  }
+`;
+export const HomeIcon = styled(House)`
+  ${iconCSS}
+`;
+export const NotificationsIcon = styled(Bell)`
+  ${iconCSS}
+
+  &:hover {
+    animation: shake 1s;
+    animation-iteration-count: infinite;
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      10% { transform: rotate(-10deg); }
+      20% { transform: rotate(10deg); }
+      30% { transform: rotate(0deg); }
+      40% { transform: rotate(-10deg); }
+      100% { transform: rotate(10deg); }
+      60% { transform: rotate(0deg); }
+      70% { transform: rotate(-10deg); }
+      80% { transform: rotate(10deg); }
+      90% { transform: rotate(0deg); }
+      100% { transform: rotate(10deg); }
+    }
+  }
+`;
+export const DMIcon = styled(Envelope)`
+  ${iconCSS}
+`;
+export const FavoritesIcon = styled(Star)`
+  ${iconCSS}
+`;
+export const ConfigurationsIcon = styled(Gear)`
+  ${iconCSS}
+`;
+export const SearchIcon = styled(Search)`
+  ${iconCSS}
+
+  @media (min-width: 800px) {
+    display: none;
+  }
 `;

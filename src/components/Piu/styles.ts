@@ -65,6 +65,9 @@ export const PiuContent = styled.div`
   > p {
     font-size: 1rem;
     margin: 0.2rem 0;
+    height: fit-content;
+
+    word-break: break-all;
 
     @media (min-width: 500px) {
       font-size: 1.1rem;
@@ -120,6 +123,10 @@ export const UserInfos = styled.div`
 
     cursor: pointer;
 
+    &:hover {
+    color: var(--darker-purple);
+    }
+
     @media (min-width: 500px) {
       font-size: 0.9rem;
     }
@@ -132,6 +139,26 @@ export const UserInfos = styled.div`
   }
 `;
 
+export const Interactions = styled.div`
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+
+  width: 95%;
+
+  padding: 0 0.5rem;
+  margin-top: 0.8rem;
+
+  @media (min-width: 500px) {
+    margin-top: 0.9rem;
+  }
+  @media (min-width: 800px) {
+    margin-top: 1rem;
+  }
+  @media (min-width: 1200px) {
+    margin-top: 1.1rem;
+  }
+`;
 const iconCSS = css`
   width: 0.8rem;
 
@@ -153,29 +180,6 @@ const iconCSS = css`
     width: 1.3rem;
   }
 `;
-export const DotsIcon = styled(ThreeDots)`
-  ${iconCSS}
-`;
-export const Interactions = styled.div`
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-
-  width: 95%;
-
-  padding: 0 0.5rem;
-  margin-top: 0.8rem;
-
-  @media (min-width: 500px) {
-    margin-top: 0.9rem;
-  }
-  @media (min-width: 800px) {
-    margin-top: 1rem;
-  }
-  @media (min-width: 1200px) {
-    margin-top: 1.1rem;
-  }
-`;
 export const Status = styled.div`
   display: flex;
   align-content: center;
@@ -191,6 +195,9 @@ export const Status = styled.div`
   @media (min-width: 1200px) {
     font-size: 1.1rem;
   }
+`;
+export const DotsIcon = styled(ThreeDots)`
+  ${iconCSS}
 `;
 export const CommentIcon = styled(Chat)`
   ${iconCSS}

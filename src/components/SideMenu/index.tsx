@@ -26,15 +26,15 @@ const SideMenu: React.FC = () => {
         </Option>
         <Option>
           <NotificationsIcon />
-          <strong>Notificações</strong>
+          <strong>Notificações (2)</strong>
         </Option>
         <Option>
           <DMIcon />
-          <strong>Mensagens</strong>
+          <strong>Mensagens (5)</strong>
         </Option>
         <Option>
           <FavoritesIcon />
-          <strong>Favoritos (0)</strong>
+          <strong>Favoritos</strong>
         </Option>
         <Option>
           <ConfigurationsIcon />
@@ -49,7 +49,7 @@ const SideMenu: React.FC = () => {
       <ProfileInfos>
         <img src={user.photo} alt="Foto de perfil" />
         <Names>
-          <strong>{user.first_name}</strong>
+          <strong>{user.first_name} {user.last_name}</strong>
           <span>@{user.username}</span>
         </Names>
       </ProfileInfos>

@@ -64,8 +64,6 @@ export const SearchFeature = styled.div`
 
     margin-right: 2.5rem;
     padding: 0.1rem 0.5rem;
-
-    border: 0.15rem solid #7C00F3;
     border-radius: 0.8rem;
     box-shadow: 0.2rem 0.2rem 0 0 #FFF500;
 
@@ -74,13 +72,42 @@ export const SearchFeature = styled.div`
     background-color: var(--purple);
 
     color: var(--yellow);
+    font-weight: bold;
     text-shadow: 0.1rem 0.1rem 0 #000000;
     font-size: 1.3rem;
     letter-spacing: 0.1rem;
 
-    &:hover,
-    &:active {
+    overflow: hidden;
+
+    transition: .2s transform ease-in-out;
+    will-change: transform;
+    z-index: 0;
+    
+    &::after {
+      background-color: var(--yellow);
+      border-radius: 0.8rem;
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-100%, 0) rotate(0);
+      transition: .2s transform ease-out;
+      will-change: transform;
+      z-index: -1;
+    }
+    &:hover::after{
+      transform: translate(0, 0);
+    }
+    &:hover {
+      transform: scale(1.05);
+      will-change: transform;
+
       color: var(--darker-purple);
+      box-shadow: 0.2rem 0.2rem 0 0 var(--purple);
+      text-shadow: 0 0 0;
     }
 
     @media (min-width:1200px) {
@@ -166,13 +193,14 @@ export const UsersList = styled.div`
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 0.8rem;
+    background-color: var(--lighter-purple);
   }
   ::-webkit-scrollbar-thumb {
-    background: #888;
     border-radius: 0.8rem;
+    background-color: var(--darker-purple);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background-color: var(--purple);
   } 
 `;
 
@@ -194,6 +222,7 @@ export const User = styled.div`
 
   &:hover {
     color: var(--darker-purple);
+    background-color: var(--lighter-purple);
   }
 
   > img {
@@ -243,6 +272,25 @@ export const Logo = styled(Earlybirds)`
 
   margin-right: 1rem;
 
+  &:hover {
+    animation: shake 1s;
+    animation-iteration-count: infinite;
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      10% { transform: rotate(-10deg); }
+      20% { transform: rotate(10deg); }
+      30% { transform: rotate(0deg); }
+      40% { transform: rotate(-10deg); }
+      100% { transform: rotate(10deg); }
+      60% { transform: rotate(0deg); }
+      70% { transform: rotate(-10deg); }
+      80% { transform: rotate(10deg); }
+      90% { transform: rotate(0deg); }
+      100% { transform: rotate(10deg); }
+    }
+  }
+
   @media (min-width: 800px) {
     width: 2.5rem;
 
@@ -271,6 +319,11 @@ export const CloseIcon = styled(XCircle)`
   margin-top: 3rem;
 
   cursor: pointer;
+
+  &:hover {
+    border-radius: 50%;
+    background-color: var(--lighter-purple);
+  }
 
   @media (min-width: 1200px) {
     width: 3rem

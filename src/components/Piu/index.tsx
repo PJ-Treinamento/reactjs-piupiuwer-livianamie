@@ -120,12 +120,12 @@ const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
 
   return (
     <PiuWrapper>
-      <img src={ piu.user.photo } alt="Foto" />
+      <img src={piu.user.photo} alt="Foto" />
       <PiuContent>
         <TopContent>
           <UserInfos>
-            <strong>{ piu.user.first_name }</strong>
-            <span>@{ piu.user.username }</span>
+            <strong>{piu.user.first_name} {piu.user.last_name}</strong>
+            <span>@{piu.user.username}</span>
           </UserInfos>
           <DotsIcon />
         </TopContent>

@@ -3,7 +3,7 @@ import { FormEvent, useCallback } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { LoginPageWrapper, Logo, Inputs } from './styles';
+import { LoginPageWrapper, Logo, Inputs, Options } from './styles';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -21,8 +21,8 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     error && (email === '' || password === '' 
-    ? setErrorMessage('Os campos devem estar preenchidos') 
-    : setErrorMessage('E-mail ou senha inválidos'));
+    ? setErrorMessage('* Os campos devem estar preenchidos') 
+    : setErrorMessage('* E-mail ou senha inválidos'));
   }, [email, error, password])
   
   return (
@@ -35,6 +35,10 @@ const LoginPage: React.FC = () => {
       </Inputs>
       <span>{errorMessage}</span>
       <button onClick={handleLogin}>Entrar</button>
+      <Options>
+        <a href="#">Esqueci minha senha</a>
+        <a href="#">Cadastre-se</a>
+      </Options>
     </LoginPageWrapper>
   );
 }
