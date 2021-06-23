@@ -15,8 +15,7 @@ const FeedPage: React.FC = () => {
 
   useEffect(() => {
     const loadPius = async () => {
-      const response = await api.get('/pius')
-      console.log(response.data)
+      const response = await api.get('/pius');
       setPius(response.data);
     }
     loadPius()

@@ -59,9 +59,10 @@ export const SearchFeature = styled.div`
   }
 
   > button {
-    width: 13rem;
+    width: 12rem;
     height: 2.5rem;
 
+    margin-right: 2.5rem;
     padding: 0.1rem 0.5rem;
 
     border: 0.15rem solid #7C00F3;
@@ -75,6 +76,7 @@ export const SearchFeature = styled.div`
     color: var(--yellow);
     text-shadow: 0.1rem 0.1rem 0 #000000;
     font-size: 1.3rem;
+    letter-spacing: 0.1rem;
 
     &:hover,
     &:active {
@@ -85,6 +87,7 @@ export const SearchFeature = styled.div`
       width: 14rem;
       height: 3rem;
 
+      margin-right: 3.5rem;
       padding: 0.1rem 1rem;
 
       font-size: 1.4rem;
@@ -187,6 +190,10 @@ export const User = styled.div`
 
   :first-child {
     border-top: none;
+  }
+
+  &:hover {
+    color: var(--darker-purple);
   }
 
   > img {

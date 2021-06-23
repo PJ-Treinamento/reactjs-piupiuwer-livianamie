@@ -22,7 +22,7 @@ export default createGlobalStyle`
   html {
     background: #EAC9FF;
 
-    font-size: 10px;
+    font-size: 11px;
   }
   body {
     background: url(/background.svg) no-repeat center center fixed;
