@@ -12,8 +12,7 @@ const NewPiu: React.FC = () => {
   const [text, setText] = useState('');
   const [counter, setCounter] = useState(text.length);
 
-  const [counterColor, setCounterColor] = useState('black');
-  const [outlineColor, setOutlineColor] = useState('#BABABA');
+  const [errorColor, setErrorColor] = useState(false);
   
   const [charErrorMessage, setCharErrorMessage] = useState('');
 
@@ -25,13 +24,11 @@ const NewPiu: React.FC = () => {
     const counterCheck = () => {
       if (text.length > 140) {
         setCharErrorMessage('* Não ultrapasse o limite de caracteres');
-        setCounterColor('red');
-        setOutlineColor('red');
+        setErrorColor(true);
       }
       else {
         setCharErrorMessage('')
-        setCounterColor('black');
-        setOutlineColor('#BABABA');
+        setErrorColor(false);
       }
     }
     counterCheck();
@@ -46,10 +43,10 @@ const NewPiu: React.FC = () => {
     <NewPiuWrapper>
       <img src={user.photo} alt="Perfil" />
       <Text>
-      <Textarea style={{outlineColor: `${outlineColor}`}} onChange={(e) => {setText(e.target.value)}} value={text} placeholder="O que você está pensando?"></Textarea>
+      <Textarea isWrong={errorColor} onChange={(e) => {setText(e.target.value)}} value={text} placeholder="O que você está pensando?"></Textarea>
         <Counter>
           <span>{ charErrorMessage }</span>
-          <CounterValue style={{color: `${counterColor}`}}>{ counter }</CounterValue>
+          <CounterValue isWrong={errorColor}>{ counter }</CounterValue>
         </Counter>
       </Text>
       <button disabled={text === ' ' || text.length < 1 || text.length > 140} onClick={handleNewPiu}>Piu</button>

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 
+interface IErrorProps {
+  isWrong?: boolean
+}
+
 export const NewPiuWrapper = styled.div`
   display: flex;
   align-items: flex-start;
@@ -119,7 +123,7 @@ export const Text = styled.div`
 
   margin: 0 1.5rem;
 `;
-export const Textarea = styled.textarea`
+export const Textarea = styled.textarea<IErrorProps>`
   width: 100%;
   height: 100%;
 
@@ -132,6 +136,8 @@ export const Textarea = styled.textarea`
   outline: auto;
   overflow-y: auto;
   background-color: var(--lighter-purple);
+
+  outline-color: ${props => props.isWrong ? 'red' : 'gray'};
 
   @media (min-width: 500px) {
     font-size: 1.1rem;
@@ -165,9 +171,11 @@ export const Counter = styled.div`
   }
 `;
 
-export const CounterValue = styled.p`
+export const CounterValue = styled.p<IErrorProps>`
   font-size: 1rem;
   color: red;
+
+  color: ${props => props.isWrong ? 'red' : 'black'};
 
   @media (min-width: 500px) {
     font-size: 1.1rem;
