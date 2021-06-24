@@ -135,9 +135,8 @@ export const Textarea = styled.textarea<IErrorProps>`
 
   outline: auto;
   overflow-y: auto;
-  background-color: var(--lighter-purple);
 
-  outline-color: ${props => props.isWrong ? 'red' : 'gray'};
+  outline-color: ${props => props.isWrong ? 'red' : '#D6CCDC'};
 
   @media (min-width: 500px) {
     font-size: 1.1rem;
