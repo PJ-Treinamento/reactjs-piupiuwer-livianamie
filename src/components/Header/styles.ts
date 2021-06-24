@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { List, Earlybirds, XCircle } from '../../styles/Icons';
 
+interface IPopUpProps {
+  isOpen: boolean
+}
+
 export const Container = styled.header`
   z-index: 2;
   position: sticky;
@@ -122,8 +126,9 @@ export const SearchFeature = styled.div`
   }
 `;
 
-export const PopUpWrapper = styled.div`
-  display: none;
+export const PopUpWrapper = styled.div<IPopUpProps>`
+  display: ${props => props.isOpen ? 'flex' : 'none'};
+
   align-items: center;
   justify-content: center;
 
@@ -136,6 +141,8 @@ export const PopUpWrapper = styled.div`
 
   width: 100vw;
   height: 100%;
+
+  
 `;
 
 export const PopUp = styled.div`
