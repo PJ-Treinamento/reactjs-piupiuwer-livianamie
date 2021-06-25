@@ -1,9 +1,8 @@
-
 import { useCallback } from 'react';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
-import { IPiu, IPiuLike } from '../../models';
+import { IPiu } from '../../models';
 
 import api from '../../services/api';
 
@@ -21,102 +20,104 @@ import {
   FavoriteIcon,
   ShareIcon,
   TrashIcon
- } from './styles';
+} from './styles';
 
-
- interface PiuProps {
-  piu: IPiu,
-  pius: IPiu[],
-  isFromUser: boolean
+interface PiuProps {
+  piu: IPiu;
+  pius: IPiu[];
+  isLiked: boolean;
+  isFavorited: boolean;
+  piuUsername: string
 }
- 
 
-const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
+const Piu: React.FC<PiuProps> = ({ piu, pius, piuUsername, isLiked, isFavorited}) => {
   const [likeCount, setLikeCount] = useState(piu.likes.length);
+
+  const [likeStatus, setLikeStatus] = useState(isLiked);
+  const [favoriteStatus, setFavoriteStatus] = useState(isFavorited);
+
+  const [fromUser, setFromUser] = useState(false);
   
-  const [isFavorited, setIsFavorited] = useState(false);
-
-  const [likeColor, setLikeColor] = useState('black');
-  const [favoriteColor, setFavoriteColor] = useState('black');
-  const [deleteDisplay, setDeleteDisplay] = useState('none');
-
   const { user } = useAuth();
+  const id = piu.id;
 
-  const id = piu.id
-
-
-  useEffect(() => {
-    if (isFromUser) {
-      setDeleteDisplay('initial')
-    }
-    else {
-      setDeleteDisplay('none')
-    }
-  }, [])
+  const { token } = useAuth()
 
   useEffect(() => {
-    pius.map((piu: IPiu) => {
-      const piuLikes: IPiuLike[] = piu.likes
-      if (id === piu.id) {
-        piuLikes.map((like: IPiuLike) => {
-          if (like.user.id === user.id) {
-            return setLikeColor('red');
-          }
-          else {
-            return setLikeColor('black');
-          }
-        })
-      }
-    })
-  }, [])
+    if (piuUsername === user.username) {
+      setFromUser(true);
+    } else {
+      setFromUser(false);
+    }
+  }, []);
 
-  const handleLike = useCallback(() => {    
+  const handleLike = () => {
     pius.map((piuApi: IPiu) => {
       if (id === piuApi.id) {
         const addLikeToApi = async () => {
-          const response = await api.post('/pius/like', { piu_id: piuApi.id })
-          const operation: string = response.data.operation
-          console.log(operation)
+          const response = await api.post('/pius/like', { piu_id: piuApi.id });
+          const operation: string = response.data.operation;
 
           if (operation === 'like') {
-            console.log(piuApi.likes)
             setLikeCount(likeCount + 1);
-            setLikeColor('red');
+            setLikeStatus(true);
+          } else {
+            setLikeCount(likeCount - 1);
+            setLikeStatus(false);
+          }
+        };
+        addLikeToApi();
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (isFavorited) {
+      setFavoriteStatus(true);
+    } else {
+      setFavoriteStatus(false);
+    }
+  }, []);
+
+  // Os favoritos estão sendo registrados/tirados da API mas só são atualizados
+  // na página do feed quando eu limpo a localstorage e faço login de novo
+  // O problema provavelmente é no componente Timeline que é onde eu faço essa
+  // função de deixar amarela as estrelas dos pius que já estão favoritados.
+  const handleFavorite = useCallback(() => {
+    pius.map((piuApi: IPiu) => {
+      if (id === piuApi.id) {
+          if (favoriteStatus === true) {
+            const unfavorite = async () => {
+              setFavoriteStatus(false)
+              await api.post('/pius/unfavorite', {piu_id: piuApi.id},
+              {headers: {'Authorization': `Bearer ${token}`}})
+            }
+            unfavorite()
           }
           else {
-            console.log(piuApi.likes)
-            setLikeCount(likeCount - 1);
-            setLikeColor('black');
+            const favorite = async () => {
+              await api.post('/pius/favorite', {piu_id: piuApi.id},
+              {headers: {'Authorization': `Bearer ${token}`}})
+              setFavoriteStatus(true)
+            }
+            favorite()
           }
-        }
-        addLikeToApi()
-      }
-    })
-  }, [likeCount])
+        };
+    });
+    return favoriteStatus
+  }, [favoriteStatus, id, pius, token])
 
-
-  useEffect (() => {
-    if (isFavorited) {
-      setFavoriteColor('#FFB500');
-    }
-    else {
-      setFavoriteColor('black');
-    }
-  }, [isFavorited])
-
-
-  const handleDelete = useCallback( () => {    
+  const handleDelete = useCallback(() => {
     pius.map((piuApi: IPiu) => {
       if (id === piuApi.id) {
         const deletePiu = async () => {
-          await api.delete('/pius', { data: {piu_id: piuApi.id }})
+          await api.delete('/pius', { data: { piu_id: piuApi.id } });
           window.location.reload();
-        }
-        return deletePiu()
+        };
+        return deletePiu();
       }
-    })
-  }, [])
-
+    });
+  }, [id, pius]);
 
   return (
     <PiuWrapper>
@@ -124,34 +125,38 @@ const Piu: React.FC<PiuProps> = ({ piu, pius, isFromUser }) => {
       <PiuContent>
         <TopContent>
           <UserInfos>
-            <strong>{piu.user.first_name} {piu.user.last_name}</strong>
+            <strong>
+              {piu.user.first_name} {piu.user.last_name}
+            </strong>
             <span>@{piu.user.username}</span>
           </UserInfos>
           <DotsIcon />
         </TopContent>
 
-        <p>{ piu.text }</p>
+        <p>{piu.text}</p>
 
         <Interactions>
           <Status>
-            <CommentIcon />
-            0
+            <CommentIcon />0
           </Status>
           <Status>
             <RepiuIcon />
             12
           </Status>
           <Status>
-            <LikeIcon style={{fill: `${likeColor}`}} onClick={handleLike} />
-            { likeCount }
+            <LikeIcon isLiked={likeStatus} onClick={handleLike} />
+            {likeCount}
           </Status>
-          <FavoriteIcon style={{fill: `${favoriteColor}`}} onClick={() => {setIsFavorited(!isFavorited)}} />
-          <TrashIcon style={{display: `${deleteDisplay}`}} onClick={handleDelete} />
+          <FavoriteIcon
+            isFavorited={favoriteStatus}
+            onClick={handleFavorite}
+          />
+          <TrashIcon isFromUser={fromUser} onClick={handleDelete} />
           <ShareIcon />
         </Interactions>
       </PiuContent>
     </PiuWrapper>
   );
-}
+};
 
 export default Piu;

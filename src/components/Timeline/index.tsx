@@ -18,6 +18,9 @@ const Timeline: React.FC<IPius> = ({ pius }) => {
     return likedPius.map((piu) => piu.id);
   }, [pius, user.username]);
 
+  // Aqui no favoritedPiusId acredito que o problema seja o fato de eu estar usando o 
+  // user que vem do useAuth e este só atualiza quando eu limpo a localstorage e faço login 
+  // de novo, mas não tenho certeza.
   const favoritedPiusId = useMemo(() => {
     return user.favorites.map((favoritedPiu) => favoritedPiu.id);
   }, [user.favorites]);
@@ -33,14 +36,6 @@ const Timeline: React.FC<IPius> = ({ pius }) => {
       </Tab>
 
       {pius.map((piu: IPiu) => {
-        const apiPiuUser = piu.user.username;
-        let isFromUser: boolean = false;
-        if (apiPiuUser === user.username) {
-          isFromUser = true;
-        } else {
-          isFromUser = false;
-        }
-
         if(
             search === '' 
         || piu.user.username.toLowerCase().includes(search.toLowerCase()) 
@@ -50,11 +45,11 @@ const Timeline: React.FC<IPius> = ({ pius }) => {
           return (
             <Piu
               key={piu.id}
+              piuUsername={piu.user.username}
+              pius={pius}
               piu={piu}
               isLiked={likedPiusId.includes(piu.id)}
               isFavorited={favoritedPiusId.includes(piu.id)}
-              pius={pius}
-              isFromUser={isFromUser}
             />
         )}
       })}

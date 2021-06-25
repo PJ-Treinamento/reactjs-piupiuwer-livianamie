@@ -1,5 +1,23 @@
-import styled, { css } from "styled-components";
-import { ThreeDots, Chat, ArrowRepeat, Heart, Star, Share, Trash } from '../../styles/Icons';
+import styled, { css } from 'styled-components';
+import {
+  ThreeDots,
+  Chat,
+  ArrowRepeat,
+  Heart,
+  Star,
+  Share,
+  Trash,
+} from '../../styles/Icons';
+
+interface ILikeProps {
+  isLiked?: boolean;
+}
+interface IFavoriteProps {
+  isFavorited?: boolean;
+}
+interface IFromUserProps {
+  isFromUser?: boolean
+}
 
 export const PiuWrapper = styled.div`
   display: flex;
@@ -32,7 +50,7 @@ export const PiuWrapper = styled.div`
 
     object-fit: cover;
 
-    border: 0.15rem solid #7C00F3;
+    border: 0.15rem solid #7c00f3;
     border-radius: 50%;
 
     cursor: pointer;
@@ -80,7 +98,7 @@ export const PiuContent = styled.div`
       margin: 0.9rem 0;
     }
     @media (min-width: 1200px) {
-     font-size: 1.4rem;
+      font-size: 1.4rem;
     }
   }
 `;
@@ -98,7 +116,8 @@ export const UserInfos = styled.div`
 
   width: 70%;
 
-  > strong, span {
+  > strong,
+  span {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -114,7 +133,7 @@ export const UserInfos = styled.div`
       font-size: 1.2rem;
     }
     @media (min-width: 1200px) {
-     font-size: 1.4rem;
+      font-size: 1.4rem;
     }
   }
 
@@ -124,7 +143,7 @@ export const UserInfos = styled.div`
     cursor: pointer;
 
     &:hover {
-    color: var(--darker-purple);
+      color: var(--darker-purple);
     }
 
     @media (min-width: 500px) {
@@ -163,11 +182,11 @@ const iconCSS = css`
   width: 0.8rem;
 
   cursor: pointer;
-  
+
   margin-right: 0.2rem;
 
   &:hover {
-    fill: var(--darker-purple);
+    fill: var(--darker-purple)!important;
   }
 
   @media (min-width: 500px) {
@@ -205,16 +224,21 @@ export const CommentIcon = styled(Chat)`
 export const RepiuIcon = styled(ArrowRepeat)`
   ${iconCSS}
 `;
-export const LikeIcon = styled(Heart)`
+export const LikeIcon = styled(Heart)<ILikeProps>`
   ${iconCSS}
+
+  fill: ${props => props.isLiked ? 'red' : 'black'}!important;
 `;
-export const FavoriteIcon = styled(Star)`
+export const FavoriteIcon = styled(Star)<IFavoriteProps>`
   ${iconCSS}
+
+  fill: ${props => props.isFavorited ? '#FFB500' : 'black'}!important;
 `;
 export const ShareIcon = styled(Share)`
   ${iconCSS}
 `;
-export const TrashIcon = styled(Trash)`
+export const TrashIcon = styled(Trash)<IFromUserProps>`
   ${iconCSS}
-  display: none;
+
+  display: ${props => props.isFromUser ? 'initial' : 'none'}!important;
 `;

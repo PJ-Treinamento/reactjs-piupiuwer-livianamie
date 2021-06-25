@@ -6,23 +6,6 @@ import LoginPage from '../pages/LoginPage';
 import Redirection from './redirect';
 import Route from './Route';
 
-
-// const PrivateRoute: React.ComponentType<any> = ({ component: Component, ...rest }) => {
-//   const {user} = useAuth();
-
-//   return (
-//     <Route {...rest} render={props =>
-//       user 
-//       ? (
-//         <Component {...props} />
-//       ) 
-//       : (
-//         <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
-//       )
-//     } />
-//   );
-// };
-
 function Routes() {
   return (
     <BrowserRouter>
